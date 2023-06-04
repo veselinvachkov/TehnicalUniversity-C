@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1685633244 source:c:\users\vesko\onedrive\desktop\programming\c_2_sem\exam_2023_part1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
