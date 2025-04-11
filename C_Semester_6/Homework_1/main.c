@@ -38,6 +38,9 @@ NumbersCounts count_numbers(const char *filename) {
         if (ch == ' ' || ch == ',' || ch == '\n' || ch == '\r' || ch == '\t') {
             word[index] = '\0';
             state = mainCounter(word);
+            if (state == -1) {
+                state = secondaryCounter(word);
+            }
             index = 0;
             memset(word, '\0', sizeof(word));
 
@@ -86,7 +89,7 @@ NumbersCounts count_numbers(const char *filename) {
 
 int main() {
 
-    NumbersCounts results = count_numbers("/home/vesko210/Сем_6_СП/Homework_1/input1.txt");
+    NumbersCounts results = count_numbers("veselinvachkov/TehnicalUniversity-C/C_Semester_6/Homework_1/input_1.txt");
 
     printf("Octal Integer Constants: %d\n", results.octal_integers);
     printf("Hexadecimal Integer Constants: %d\n", results.hexadecimal_integers);
@@ -102,10 +105,9 @@ int main() {
 int mainCounter(const char *word) {
     int i = 0;
     int main_state = 0;
-    int goToFloat = 0;
     char prevCh;
 
-    while (goToFloat == 0) {
+    while (1) {
         char ch = word[i];
 
         switch (main_state) {
@@ -119,14 +121,14 @@ int mainCounter(const char *word) {
                 } else if (ch == '0') {
                     main_state = 15;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 1:
                 if (ch >= '1' && ch <= '9') {
                     main_state = 2;
                 }else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 2:
@@ -141,7 +143,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 3:
@@ -154,7 +156,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 4:
@@ -163,7 +165,7 @@ int mainCounter(const char *word) {
                 } else if (ch >= '1' && ch <= '9') {
                     main_state = 10;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 5:
@@ -178,7 +180,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 6:
@@ -193,7 +195,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 7:
@@ -202,7 +204,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 8:
@@ -215,7 +217,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 2;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 9:
@@ -228,7 +230,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 2;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 10:
@@ -245,7 +247,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 11:
@@ -258,7 +260,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 2;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 12:
@@ -271,7 +273,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 2;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 13:
@@ -286,7 +288,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 14:
@@ -295,7 +297,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 15:
@@ -312,7 +314,7 @@ int mainCounter(const char *word) {
                 } else if (ch == 'x' || ch == 'X') {
                     main_state = 24;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 16:
@@ -325,7 +327,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 2;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 17:
@@ -338,7 +340,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 2;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 18:
@@ -353,7 +355,7 @@ int mainCounter(const char *word) {
                 } if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 19:
@@ -362,7 +364,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 20:
@@ -379,7 +381,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 3;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 21:
@@ -392,7 +394,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 3;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 22:
@@ -405,7 +407,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 3;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 23:
@@ -420,7 +422,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 3;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 24:
@@ -433,7 +435,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 0;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 25:
@@ -446,7 +448,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 4;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 26:
@@ -459,7 +461,7 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 4;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 27:
@@ -474,35 +476,35 @@ int mainCounter(const char *word) {
                 } else if (ch == '\0') {
                     return 4;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
                 break;
             case 28:
                 if (ch == '\0') {
                     return 1;
                 } else {
-                    goToFloat = 1;
+                    return -1;
                 }
             break;
             case 29:
             if (ch == '\0') {
                 return 2;
             } else {
-                goToFloat = 1;
+                return -1;
             }
             break;
             case 30:
             if (ch == '\0') {
                 return 3;
             } else {
-                goToFloat = 1;
+                return -1;
             }
             break;
             case 31:
             if (ch == '\0') {
                 return 4;
             } else {
-                goToFloat = 1;
+                return -1;
             }
             break;
             case 32:
@@ -523,17 +525,12 @@ int mainCounter(const char *word) {
             } else if (ch == '\0') {
                 return 4;
             } else {
-                goToFloat = 1;
+                return -1;
             }
             break;
         }
         prevCh = ch;
         i++; 
-    }
-    if (goToFloat == 1) {
-        goToFloat = 0;
-        int secondary_state = secondaryCounter(word);
-        return secondary_state;
     }
 }
 
