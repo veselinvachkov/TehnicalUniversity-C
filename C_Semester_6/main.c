@@ -89,7 +89,7 @@ NumbersCounts count_numbers(const char *filename) {
 
 int main() {
 
-    NumbersCounts results = count_numbers("veselinvachkov/TehnicalUniversity-C/C_Semester_6/Homework_1/input_1.txt");
+    NumbersCounts results = count_numbers("/home/vesko210/Sem_6/Homework_1/input_2.txt");
 
     printf("Octal Integer Constants: %d\n", results.octal_integers);
     printf("Hexadecimal Integer Constants: %d\n", results.hexadecimal_integers);

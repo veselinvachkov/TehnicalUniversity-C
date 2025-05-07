@@ -24,6 +24,6 @@ Welcome to the `semester_6` folder — a personal archive of some of the most ch
 
 - clone the repo
 ```bash
-cd Homework1
+cd C_Semester_6
 gcc main.c -o output
 ./output
